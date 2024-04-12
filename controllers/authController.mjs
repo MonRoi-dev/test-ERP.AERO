@@ -15,8 +15,11 @@ async function generateTokens(id) {
 }
 
 async function updateRefreshToken(id, refreshToken) {
-    const hashedRefreshToken = bcrypt.hash(refreshToken)
-    await prisma.user.update({where: {id}, data: {refreshToken: hashedRefreshToken}})
+	const hashedRefreshToken = bcrypt.hash(refreshToken);
+	await prisma.user.update({
+		where: { id },
+		data: { refreshToken: hashedRefreshToken },
+	});
 }
 
 class Auth {
@@ -24,14 +27,16 @@ class Auth {
 		try {
 			const { id, password } = req.body;
 			const user = await prisma.user.findUnique({ where: { id } });
-			if (!user) return res.status(404).send({ message: 'User not found' });
+			if (!user)
+				return res.status(404).json({ message: 'User not found' });
 			const isPass = await bcrypt.compare(password, user.password);
-			if (!isPass) return res.status(401).send('Invalid password');
+			if (!isPass)
+				return res.status(401).json({ message: 'Invalid password' });
 			const { accessToken, refreshToken } = generateTokens(user.id);
-            await updateRefreshToken(user.id, refreshToken)
+			await updateRefreshToken(user.id, refreshToken);
 			return res.status(200).json({ token: accessToken });
 		} catch (error) {
-			return res.status(500).send(`Server error: ${error}`);
+			return res.status(500).json({ error: `Server error: ${error}` });
 		}
 	}
 
@@ -39,25 +44,27 @@ class Auth {
 		try {
 			const { id, password } = req.body;
 			const userExist = await prisma.user.findUnique({ where: id });
-			if (userExist) res.status(409).send('User already exist');
+			if (userExist)
+				res.status(409).json({ message: 'User already exist' });
 			const hashedPassword = await bcrypt.hash(password, 4);
 			const user = await prisma.user.create({
 				data: { id, password: hashedPassword },
 			});
 			const tokens = await generateTokens(user.id);
-			await updateRefreshToken(user.id, tokens.refreshToken)
+			await updateRefreshToken(user.id, tokens.refreshToken);
 			return res.status(200).json(tokens);
 		} catch (error) {
-			return res.status(500).send(`Server error: ${error}`);
+			return res.status(500).json({ error: `Server error: ${error}` });
 		}
 	}
 
-	// async refresh(req, res) {
-    //     try{
-    //     }catch(error){
-	// 		return res.status(500).send(`Server error: ${error}`);
-    //     }
-    // }
+	async refresh(req, res) {
+		try {
+			const { id, refreshToken } = req.body;
+		} catch (error) {
+			return res.status(500).json({ error: `Server error: ${error}` });
+		}
+	}
 }
 
 export default new Auth();

@@ -7,3 +7,5 @@ router.get('/download/:id')
 router.post('/upload')
 router.put('/update/:id')
 router.delete('/delete/:id')
+
+export default router
