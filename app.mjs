@@ -5,9 +5,9 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.REFRESH_SECRET));
 
 app.use(authRouter);
 app.use('/file', fileRouter);

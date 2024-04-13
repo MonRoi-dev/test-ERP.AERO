@@ -7,12 +7,17 @@ const prisma = new PrismaClient();
 
 function generateTokens(id) {
 	const accessToken = jwt.sign({ id }, process.env.ACCESS_SECRET, {
-		expiresIn: '10s',
+		expiresIn: '10m',
 	});
 	const refreshToken = jwt.sign({ id }, process.env.REFRESH_SECRET, {
 		expiresIn: '7d',
 	});
 	return { accessToken, refreshToken };
+}
+
+export function updateAccessToken(refreshToken) {
+	const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+	return generateTokens(decoded.id);
 }
 
 class Auth {
@@ -28,7 +33,10 @@ class Auth {
 			const { accessToken, refreshToken } = generateTokens(user.id);
 			return res
 				.cookie('accessToken', accessToken, { httpOnly: true })
-				.cookie('refreshToken', refreshToken, { httpOnly: true })
+				.cookie('refreshToken', refreshToken, {
+					httpOnly: true,
+					signed: true,
+				})
 				.status(200)
 				.json({ token: accessToken });
 		} catch (error) {
@@ -55,14 +63,15 @@ class Auth {
 
 	async refresh(req, res) {
 		try {
-			const token = req.cookies.refreshToken;
-			const { accessToken, refreshToken } = this.updateAccessToken(token);
+			const token = req.signedCookies.refreshToken;
+			const { accessToken, refreshToken } = updateAccessToken(token);
 			return res
 				.cookie('accessToken', accessToken, {
 					httpOnly: true,
 				})
 				.cookie('refreshToken', refreshToken, {
 					httpOnly: true,
+					signed: true,
 				})
 				.status(200)
 				.json({ token: accessToken });
@@ -98,18 +107,6 @@ class Auth {
 				.json({ message: 'Logged out' });
 		} catch (error) {
 			res.status(500).json({ error: `${error}` });
-		}
-	}
-
-	async updateAccessToken(refreshToken) {
-		try {
-			const decoded = jwt.verify(
-				refreshToken,
-				process.env.REFRESH_SECRET
-			);
-			return generateTokens(decoded.id);
-		} catch (error) {
-			console.log(error);
 		}
 	}
 }

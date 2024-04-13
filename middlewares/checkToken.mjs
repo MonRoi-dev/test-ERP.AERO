@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
-import authController from '../controllers/authController.mjs';
+import { updateAccessToken } from '../controllers/authController.mjs';
 
 const blacklist = new Set();
 
 function checkToken(req, res, next) {
-	const { accessToken, refreshToken: refresh } = req.cookies;
+	const { accessToken } = req.cookies;
+	const refresh = req.signedCookies.refreshToken;
 	if (!accessToken || !refresh)
 		return res.status(400).json({ message: 'Provide token' });
 	if (blacklist.has(accessToken))
@@ -13,7 +14,7 @@ function checkToken(req, res, next) {
 		if (err) {
 			if (err instanceof jwt.TokenExpiredError) {
 				const { accessToken, refreshToken } =
-					authController.updateAccessToken(refresh);
+					updateAccessToken(refresh);
 				res.cookie('accessToken', accessToken, {
 					httpOnly: true,
 				}).cookie('refreshToken', refreshToken, { httpOnly: true });
