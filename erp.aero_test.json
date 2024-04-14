@@ -1,0 +1,208 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "test",
+    "dateExported": "2024-04-14T14:45:40.747Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "e2cb791d-9be8-4943-8ecc-05aeb3504784",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "upload",
+            "url": "http://localhost:5000/file/upload",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-14T14:43:28.734Z",
+            "modified": "2024-04-14T14:43:28.734Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "file",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "c9244307-1372-44ef-94f2-054ad070178e",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "download",
+            "url": "http://localhost:5000/file/download/cluzerws90000jfldocl8038l",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-04-14T14:42:55.317Z",
+            "modified": "2024-04-14T14:42:55.317Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "dcdb1af0-5874-407e-99a7-8ace9d796e6e",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "getAll",
+            "url": "http://localhost:5000/file",
+            "method": "GET",
+            "sortNum": 55000,
+            "created": "2024-04-14T14:43:02.281Z",
+            "modified": "2024-04-14T14:43:02.281Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "list_size",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "f9aef02a-4220-46f8-8d53-4130f8027a0e",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "getOne",
+            "url": "http://localhost:5000/file/cluzhy6kg0000c25afxo2ehvl",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-04-14T14:42:58.522Z",
+            "modified": "2024-04-14T14:42:58.522Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b1d54d4b-7a81-4970-a47c-b7f44241308a",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "update",
+            "url": "http://localhost:5000/file/update/cluzhy6kg0000c25afxo2ehvl",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-04-14T14:42:52.342Z",
+            "modified": "2024-04-14T14:42:52.342Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "file",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "f992a03d-1e36-4b97-ab3e-ba93c89f5891",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "delete",
+            "url": "http://localhost:5000/file/delete/cluzeqgab0001r8l7vr65bb6u",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2024-04-14T14:43:07.554Z",
+            "modified": "2024-04-14T14:43:07.554Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a46c2b92-1344-45ac-b011-2b6ae4c873ff",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "logout",
+            "url": "http://localhost:5000/logout",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-04-14T14:43:31.883Z",
+            "modified": "2024-04-14T14:43:31.883Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8c7380d6-a775-40e2-a98f-72f619f344f3",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "info",
+            "url": "http://localhost:5000/info",
+            "method": "GET",
+            "sortNum": 102500,
+            "created": "2024-04-14T14:42:47.879Z",
+            "modified": "2024-04-14T14:42:47.879Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "78ba33da-7dca-46a5-a08c-3ac7777e4bd5",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "refresh",
+            "url": "http://localhost:5000/signin/new_token",
+            "method": "POST",
+            "sortNum": 105000,
+            "created": "2024-04-14T14:42:29.991Z",
+            "modified": "2024-04-14T14:42:29.991Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c0f45e13-cfba-4246-9006-fd5b9a59f13d",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "signin",
+            "url": "http://localhost:5000/signin",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-04-14T14:43:35.587Z",
+            "modified": "2024-04-14T14:43:35.587Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": \"email@mail.com\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bacee3e8-7b44-46c7-9320-1a65b14e8e4a",
+            "colId": "da5eba74-e9af-4513-a207-dcdcf7552ea3",
+            "containerId": "",
+            "name": "register",
+            "url": "http://localhost:5000/signup",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-04-14T14:42:42.431Z",
+            "modified": "2024-04-14T14:42:42.431Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": \"email@mail.com\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
