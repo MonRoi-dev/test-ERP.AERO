@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { blacklist } from '../middlewares/checkToken.mjs';
+import { validationResult } from 'express-validator';
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,10 @@ export function updateAccessToken(refreshToken) {
 class Auth {
 	async signIn(req, res) {
 		try {
+			if (!validationResult(req).isEmpty())
+				return res
+					.status(400)
+					.json({ message: validationResult(req).errors[0].msg });
 			const { id, password } = req.body;
 			const user = await prisma.user.findUnique({ where: { id } });
 			if (!user)
@@ -46,6 +51,10 @@ class Auth {
 
 	async signUp(req, res) {
 		try {
+			if (!validationResult(req).isEmpty())
+				return res
+					.status(400)
+					.json({ message: validationResult(req).errors[0].msg });
 			const { id, password } = req.body;
 			const userExist = await prisma.user.findUnique({ where: { id } });
 			if (userExist)
