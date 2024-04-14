@@ -8,15 +8,15 @@ datasource db {
 }
 
 model User {
-    id           String  @unique
-    password     String
+    id       String @unique
+    password String
 }
 
-// model File {
-//     id        String   @id @default(cuid())
-//     name      String   @unique
-//     extension String
-//     MIME      String
-//     size      Int
-//     createdAt DateTime
-// }
+model File {
+    id         String   @id @default(cuid())
+    name       String   @unique
+    extension  String
+    MIME       String
+    size       Int
+    uploadedAt DateTime @default(now())
+}
